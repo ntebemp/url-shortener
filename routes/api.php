@@ -17,4 +17,5 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UrlShortenerController;
 
 Route::post('/shorten', [UrlShortenerController::class, 'shorten']);
+Route::get('/{shortCode}', [UrlShortenerController::class, 'redirect']);
 Route::get('/stats/{code}', [UrlShortenerController::class, 'stats']);

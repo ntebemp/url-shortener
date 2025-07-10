@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('short_code')->unique();
             $table->unsignedBigInteger('click_count')->default(0);
             $table->timestamp('expires_at')->nullable();
+            $table->timestamps();
         });
     }
 
