@@ -14,7 +14,7 @@ use Carbon\Carbon;
      * @OA\Info(
      *      version="1.0.0",
      *      title="URL Shortener API Documentation",
-     *      description="Documentation de l'API pour raccourcir les URLs",
+     *      description="API documentation for URL shortening",
      *      @OA\Contact(
      *          email="support@votreapp.com"
      *      ),
@@ -22,7 +22,7 @@ use Carbon\Carbon;
      *
      * @OA\Server(
      *      url=L5_SWAGGER_CONST_HOST,
-     *      description="Serveur principal"
+     *      description="Main server"
      * )
      */
 class UrlShortenerController extends Controller
@@ -36,7 +36,7 @@ class UrlShortenerController extends Controller
      /**
      * @OA\Post(
      *     path="/api/shorten",
-     *     summary="Raccourcir une URL",
+     *     summary="Shorten a URL",
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
@@ -47,7 +47,7 @@ class UrlShortenerController extends Controller
      *     ),
      *     @OA\Response(
      *         response=200,
-     *         description="URL raccourcie"
+     *         description="Shortened URL"
      *     )
      * )
      */
@@ -87,7 +87,7 @@ class UrlShortenerController extends Controller
         /**
      * @OA\Get(
      *     path="/{code}",
-     *     summary="Récupérer l'URL d'origine",
+     *     summary="Recover original URL",
      *     @OA\Parameter(
      *         name="code",
      *         in="path",
@@ -96,11 +96,11 @@ class UrlShortenerController extends Controller
      *     ),
      *     @OA\Response(
      *         response=302,
-     *         description="Redirection vers l'URL d'origine"
+     *         description="Redirect to original URL"
      *     ),
      *     @OA\Response(
      *         response=404,
-     *         description="URL non trouvée ou expirée"
+     *         description="URL not found or expired"
      *     )
      * )
      */
@@ -130,7 +130,7 @@ class UrlShortenerController extends Controller
         /**
      * @OA\Get(
      *     path="/api/stats/{code}",
-     *     summary="Récupérer les statistiques d'une URL raccourcie",
+     *     summary="Recover statistics from a shortened URL",
      *     @OA\Parameter(
      *         name="code",
      *         in="path",
@@ -139,7 +139,7 @@ class UrlShortenerController extends Controller
      *     ),
      *     @OA\Response(
      *         response=200,
-     *         description="Statistiques de l'URL raccourcie",
+     *         description="Shortened URL statistics",
      *         @OA\JsonContent(
      *             @OA\Property(property="original_url", type="string", example="https://example.com"),
      *             @OA\Property(property="short_code", type="string", example="abc123"),
@@ -150,7 +150,7 @@ class UrlShortenerController extends Controller
      *     ),
      *     @OA\Response(
      *         response=404,
-     *         description="URL non trouvée"
+     *         description="URL not found"
      *     )
      * )
      */

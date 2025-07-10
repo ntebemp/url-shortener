@@ -14,5 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 use App\Http\Controllers\Api\UrlShortenerController;
+use App\Http\Controllers\ShortUrlWebController;
 
 Route::get('/{code}', [UrlShortenerController::class, 'redirect']);
+Route::get('/', [ShortUrlWebController::class, 'index']);
