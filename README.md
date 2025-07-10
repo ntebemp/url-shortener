@@ -1,29 +1,29 @@
 # 🔗 URL Shortener – Laravel
 
-Ce projet est un raccourcisseur d’URL simple, construit avec Laravel.
+This project is a simple URL shortener built with Laravel.
 
 ## ⚙️ Installation
 
-1. Clone le dépôt :
+1. Clone the repository :
    ```bash
    git clone https://github.com/ntebemp/url-shortener.git
    cd url-shortener
 
-2. Installe les dépendances :
+2. Install dependencies :
    ```bash
    composer install
 
-3. Configure l'environnement :
+3. Configure environment :
     ```bash
     cp .env.example .env
     php artisan key:generate
 
 
-4. Crée la base de données MySQL nommée url_shortener_db, puis rempli la base de données avec des données de test:
+4. Create the MySQL database named url_shortener_db, then populate the database with test data :
     ```bash
     php artisan migrate --seed
 
 
-5. Lance le serveur :
+5. Launch server :
     ```bash
     php artisan serve
