@@ -1,0 +1,133 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "URL Shortener API Documentation",
+        "description": "Documentation de l'API pour raccourcir les URLs",
+        "contact": {
+            "email": "support@votreapp.com"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://my-default-host.com",
+            "description": "Serveur principal"
+        }
+    ],
+    "paths": {
+        "/api/shorten": {
+            "post": {
+                "summary": "Raccourcir une URL",
+                "operationId": "8ce6bafb3ecd7e109801f03787337d17",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "url": {
+                                        "type": "string",
+                                        "example": "https://example.com"
+                                    },
+                                    "custom_code": {
+                                        "type": "string",
+                                        "example": "custom01"
+                                    },
+                                    "expires_at": {
+                                        "type": "string",
+                                        "example": "2025-07-31 23:59:59"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "URL raccourcie"
+                    }
+                }
+            }
+        },
+        "/{code}": {
+            "get": {
+                "summary": "Récupérer l'URL d'origine",
+                "operationId": "afac153a571d5d40dcba537329b69694",
+                "parameters": [
+                    {
+                        "name": "code",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "302": {
+                        "description": "Redirection vers l'URL d'origine"
+                    },
+                    "404": {
+                        "description": "URL non trouvée ou expirée"
+                    }
+                }
+            }
+        },
+        "/api/stats/{code}": {
+            "get": {
+                "summary": "Récupérer les statistiques d'une URL raccourcie",
+                "operationId": "15c98225a2cf748f493076dd239a5b29",
+                "parameters": [
+                    {
+                        "name": "code",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Statistiques de l'URL raccourcie",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "original_url": {
+                                            "type": "string",
+                                            "example": "https://example.com"
+                                        },
+                                        "short_code": {
+                                            "type": "string",
+                                            "example": "abc123"
+                                        },
+                                        "click_count": {
+                                            "type": "integer",
+                                            "example": 10
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2025-07-09T23:45:00Z"
+                                        },
+                                        "expires_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2025-07-31T23:59:59Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "URL non trouvée"
+                    }
+                }
+            }
+        }
+    }
+}

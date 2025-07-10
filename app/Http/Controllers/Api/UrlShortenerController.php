@@ -10,6 +10,21 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 
+    /**
+     * @OA\Info(
+     *      version="1.0.0",
+     *      title="URL Shortener API Documentation",
+     *      description="Documentation de l'API pour raccourcir les URLs",
+     *      @OA\Contact(
+     *          email="support@votreapp.com"
+     *      ),
+     * )
+     *
+     * @OA\Server(
+     *      url=L5_SWAGGER_CONST_HOST,
+     *      description="Serveur principal"
+     * )
+     */
 class UrlShortenerController extends Controller
 {
     /**
@@ -18,7 +33,24 @@ class UrlShortenerController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-
+     /**
+     * @OA\Post(
+     *     path="/api/shorten",
+     *     summary="Raccourcir une URL",
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             @OA\Property(property="url", type="string", example="https://example.com"),
+     *             @OA\Property(property="custom_code", type="string", example="custom01"),
+     *             @OA\Property(property="expires_at", type="string", example="2025-07-31 23:59:59")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="URL raccourcie"
+     *     )
+     * )
+     */
     public function shorten(Request $request)
     {
         // Validate the request data
@@ -52,6 +84,26 @@ class UrlShortenerController extends Controller
      * @param string $code
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
      */
+        /**
+     * @OA\Get(
+     *     path="/{code}",
+     *     summary="Récupérer l'URL d'origine",
+     *     @OA\Parameter(
+     *         name="code",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Response(
+     *         response=302,
+     *         description="Redirection vers l'URL d'origine"
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="URL non trouvée ou expirée"
+     *     )
+     * )
+     */
     public function redirect($code)
     {
         // Find the short URL by its code
@@ -74,6 +126,33 @@ class UrlShortenerController extends Controller
      *
      * @param string $code
      * @return \Illuminate\Http\JsonResponse
+     */
+        /**
+     * @OA\Get(
+     *     path="/api/stats/{code}",
+     *     summary="Récupérer les statistiques d'une URL raccourcie",
+     *     @OA\Parameter(
+     *         name="code",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Statistiques de l'URL raccourcie",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="original_url", type="string", example="https://example.com"),
+     *             @OA\Property(property="short_code", type="string", example="abc123"),
+     *             @OA\Property(property="click_count", type="integer", example=10),
+     *             @OA\Property(property="created_at", type="string", format="date-time", example="2025-07-09T23:45:00Z"),
+     *             @OA\Property(property="expires_at", type="string", format="date-time", example="2025-07-31T23:59:59Z")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="URL non trouvée"
+     *     )
+     * )
      */
     public function stats($code)
     {
